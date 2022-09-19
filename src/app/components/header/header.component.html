@@ -1,0 +1,66 @@
+<header class="header">
+  <aside
+    class="header__aside"
+    *ngIf="screenWidth < 768"
+    [class.nav-open]="isMenuOpen"
+  >
+    <nav class="header__aside__nav">
+      <ul class="header__list">
+        <li
+          *ngFor="let link of links; index as i"
+          class="header__list__element"
+          [class.active]="link.active"
+        >
+          <a
+            (click)="toggleActive(i)"
+            class="header__list__element__link"
+            [href]="link.ref"
+            [class.active]="link.active"
+            >{{ link.content }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <button
+      class="header__aside__button"
+      type="button"
+      title="Cerrar men&uacute;"
+      (click)="toggleMenu()"
+    ></button>
+  </aside>
+  <button
+    (click)="toggleMenu()"
+    class="nav-toggle"
+    aria-label="Abrir men&uacute;"
+    type="button"
+    *ngIf="screenWidth < 768"
+  >
+    <span [class.nav-open]="isMenuOpen" class="hamburger"></span>
+  </button>
+  <a href=""
+    ><img src="/assets/icons/logo_yard_sale.svg" alt="Yard Sale Logo"
+  /></a>
+  <nav *ngIf="screenWidth >= 768">
+    <ul class="header__list">
+      <li
+        *ngFor="let link of links; index as i"
+        class="header__list__element"
+        [class.active]="link.active"
+      >
+        <a
+          (click)="toggleActive(i)"
+          class="header__list__element__link"
+          [href]="link.ref"
+          [class.active]="link.active"
+          >{{ link.content }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <span *ngIf="screenWidth >= 768">{{ email }}</span>
+  <a href=""
+    ><img
+      src="/assets/icons/icon_shopping_cart_notification.svg"
+      alt="Shopping cart logo"
+  /></a>
+</header>
