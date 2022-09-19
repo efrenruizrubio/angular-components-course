@@ -29,8 +29,8 @@ export class ImgComponent
   /* @Input() img: string = '';
   @Input() alt: string = ''; */
 
-  counter: number = 0;
-  counterFn: number | undefined;
+  // counter: number = 0;
+  // counterFn: number | undefined;
   imageDefault: string = '/assets/images/default.png';
 
   @Output() loaded = new EventEmitter<string>();
@@ -52,10 +52,10 @@ export class ImgComponent
     //It can be used for async code, like fetches to an API.
     //It runs once, when the component is created.
     console.log(`ngOnInit. Image value: ${this.img}`);
-    this.counterFn = window.setInterval(() => {
+    /* this.counterFn = window.setInterval(() => {
       this.counter++;
       console.log(this.counter);
-    }, 1000);
+    }, 1000); */
   }
 
   ngAfterViewInit() {
@@ -67,7 +67,7 @@ export class ImgComponent
   ngOnDestroy() {
     //Delete the component.
     console.log(`ngOnDestroy`);
-    window.clearInterval(this.counterFn);
+    // window.clearInterval(this.counterFn);
   }
 
   imgError() {
