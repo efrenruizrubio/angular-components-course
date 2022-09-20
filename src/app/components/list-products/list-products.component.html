@@ -1,10 +1,14 @@
+<p class="products__text">
+  Amount of products in shopping cart: {{ shoppingCart.length }}
+</p>
+<p class="products__text">Total: ${{ total }}</p>
 <div class="products">
-  <p>La cantidad {{ shoppingCart.length }}</p>
-  <p>Total: ${{ total }}</p>
   <app-product
     *ngFor="let product of products"
     [product]="product"
     (addProduct)="onAddToShoppingCart($event)"
     (removeProduct)="onRemoveFromShoppingCart($event)"
+    [productAvailable]="!(product.quantityLeft > 0)"
+    [productRemovable]="!shoppingCart.includes(product)"
   ></app-product>
 </div>

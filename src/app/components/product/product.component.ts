@@ -7,6 +7,8 @@ import { Product } from '@models/product.model';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
+  @Input() productAvailable: boolean = true;
+  @Input() productRemovable: boolean = false;
   @Input() product!: Product;
   @Output() addProduct = new EventEmitter<Product>();
   @Output() removeProduct = new EventEmitter<Product>();

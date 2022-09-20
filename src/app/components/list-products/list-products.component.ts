@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@models/product.model';
+import { StoreService } from '@services/store.service';
 
 @Component({
   selector: 'app-list-products',
@@ -7,9 +8,6 @@ import { Product } from '@models/product.model';
   styleUrls: ['./list-products.component.scss'],
 })
 export class ListProductsComponent implements OnInit {
-  constructor() {}
-  ngOnInit(): void {}
-
   shoppingCart: Product[] = [];
   total: number = 0;
   products: Product[] = [
@@ -43,17 +41,20 @@ export class ListProductsComponent implements OnInit {
     },
   ];
 
+  constructor(private storeService: StoreService) {
+    this.shoppingCart = this.storeService.getShoppingCart();
+    this.storeService.setProducts(this.products);
+  }
+
+  ngOnInit(): void {}
+
   onAddToShoppingCart(product: Product) {
-    const index = this.products.indexOf(product);
-    this.shoppingCart.push(product);
-    this.products[index].quantityLeft -= 1;
-    this.total += product.price;
+    this.storeService.addProduct(product);
+    this.total = this.storeService.getTotal();
   }
 
   onRemoveFromShoppingCart(product: Product) {
-    const index = this.shoppingCart.indexOf(product);
-    this.shoppingCart[index].quantityLeft += 1;
-    this.shoppingCart.splice(index, 1);
-    this.total -= product.price;
+    this.storeService.removeProduct(product);
+    this.total = this.storeService.getTotal();
   }
 }

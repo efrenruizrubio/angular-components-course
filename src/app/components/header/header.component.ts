@@ -38,6 +38,5 @@ export class HeaderComponent implements OnInit {
   toggleActive(i: number) {
     this.links.forEach((link) => (link.active = false));
     this.links[i].active = true;
-    console.log(this.links);
   }
 }
