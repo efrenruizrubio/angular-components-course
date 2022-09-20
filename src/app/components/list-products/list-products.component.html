@@ -1,7 +1,10 @@
 <p class="products__text">
-  Amount of products in shopping cart: {{ shoppingCart.length }}
+  Amount of products in shopping cart:
+  <strong>{{ shoppingCart.length }}</strong>
 </p>
-<p class="products__text">Total: ${{ total }}</p>
+<p class="products__text">
+  <strong>Total: ${{ total.toFixed(2) }}</strong>
+</p>
 <div class="products">
   <app-product
     *ngFor="let product of products"

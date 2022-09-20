@@ -1,10 +1,12 @@
 .products {
   display: flex;
   flex-direction: column;
+  gap: 3rem;
   padding: 0 2rem;
 
   &__text {
     padding: 0 2rem;
+    margin-bottom: 2rem;
     font-family: "Quicksand", sans-serif;
   }
 }
@@ -19,8 +21,6 @@
 
 @media screen and (min-width: 1024px) {
   .products {
-    display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@models/product.model';
 import { StoreService } from '@services/store.service';
+import { ProductsService } from '@services/products.service';
 
 @Component({
   selector: 'app-list-products',
@@ -10,43 +11,26 @@ import { StoreService } from '@services/store.service';
 export class ListProductsComponent implements OnInit {
   shoppingCart: Product[] = [];
   total: number = 0;
-  products: Product[] = [
-    {
-      id: '1',
-      name: 'Product 1',
-      image: 'https://picsum.photos/728/320',
-      price: 100,
-      quantityLeft: 10,
-    },
-    {
-      id: '2',
-      name: 'Product 2',
-      image: 'https://picsum.photos/729/320',
-      price: 200,
-      quantityLeft: 20,
-    },
-    {
-      id: '3',
-      name: 'Product 3',
-      image: 'https://picsum.photos/730/320',
-      price: 300,
-      quantityLeft: 30,
-    },
-    {
-      id: '4',
-      name: 'Product 4',
-      image: 'https://picsum.photos/731/320',
-      price: 400,
-      quantityLeft: 0,
-    },
-  ];
+  products: Product[] = [];
 
-  constructor(private storeService: StoreService) {
+  constructor(
+    private storeService: StoreService,
+    private productsService: ProductsService
+  ) {
     this.shoppingCart = this.storeService.getShoppingCart();
     this.storeService.setProducts(this.products);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.productsService.getAllProducts().subscribe((data) => {
+      data.forEach((product) => {
+        product['quantityLeft'] = Math.floor(Math.random() * 100);
+        console.log(product['quantityLeft']);
+      });
+      this.products = data;
+      this.storeService.setProducts(data);
+    });
+  }
 
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);

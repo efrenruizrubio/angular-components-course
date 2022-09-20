@@ -1,21 +1,33 @@
 .product {
   display: flex;
   flex-direction: column;
+  place-items: center;
   font-family: "Quicksand", sans-serif;
+  height: 100%;
+  border-top: 1px solid var(--dark);
+  padding: 1rem 0;
+
+  &__name {
+    margin: 1.5rem 0;
+  }
+  &__price {
+    color: var(--hospital-green);
+  }
   &__remaining {
+    margin: 1.5rem 0;
     font-size: var(--fs-medium);
   }
   &__buttons-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
     & > button {
-      background: var(--hospital-green);
-      color: var(--dark);
       padding: 1rem;
       border-radius: 0.5rem;
+    }
+    &__button--add {
+      background: var(--hospital-green);
+      color: var(--dark);
       &:hover {
         color: var(--white);
       }
@@ -25,5 +37,23 @@
         color: #ababab;
       }
     }
+    &__button--remove {
+      background: var(--dark);
+      color: var(--hospital-green);
+      &:hover {
+        color: var(--white);
+      }
+      &:disabled {
+        background-color: #eeeeee;
+        border-color: #d0d0d0;
+        color: #ababab;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .product {
+    justify-content: space-between;
   }
 }

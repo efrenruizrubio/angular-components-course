@@ -1,15 +1,23 @@
 <div class="product">
+  <p class="product__name">{{ product.title }}</p>
+  <app-img class="" [img]="product.image" [alt]="product.title"></app-img>
   <h2 class="product__price">{{ product.price }}</h2>
-  <p class="product__name">{{ product.name }}</p>
-  <app-img width="200" [img]="product.image" alt=""></app-img>
   <h3 class="product__remaining">
-    Cantidad restante: {{ product.quantityLeft }}
+    Remaining units: {{ product.quantityLeft }}
   </h3>
   <div class="product__buttons-container">
-    <button [disabled]="productAvailable" (click)="onAddToCart()">
+    <button
+      class="product__buttons-container__button--add"
+      [disabled]="productAvailable"
+      (click)="onAddToCart()"
+    >
       Add to shopping cart
     </button>
-    <button [disabled]="productRemovable" (click)="onRemoveFromCart()">
+    <button
+      class="product__buttons-container__button--remove"
+      [disabled]="productRemovable"
+      (click)="onRemoveFromCart()"
+    >
       Remove from shopping cart
     </button>
   </div>
