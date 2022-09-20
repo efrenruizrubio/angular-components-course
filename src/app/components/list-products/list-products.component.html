@@ -5,6 +5,10 @@
 <p class="products__text">
   <strong>Total: ${{ total.toFixed(2) }}</strong>
 </p>
+<p class="products__text">Today is {{ today | date: "short" }}</p>
+<p class="products__text">The discount finishes at {{ finishDiscount }}</p>
+<button (click)="getDiscountDate()">get discount date</button>
+<p class="products__text">There are {{ hoursLeft }} hours remaining</p>
 <div class="products">
   <app-product
     *ngFor="let product of products"
