@@ -11,13 +11,14 @@
           class="header__list__element"
           [class.active]="link.active"
         >
-          <a
+          <button
             (click)="toggleActive(i)"
-            class="header__list__element__link"
-            [href]="link.ref"
+            class="header__list__element__button"
             [class.active]="link.active"
-            >{{ link.content }}</a
+            type="button"
           >
+            {{ link.content }}
+          </button>
         </li>
       </ul>
     </nav>
@@ -47,21 +48,21 @@
         class="header__list__element"
         [class.active]="link.active"
       >
-        <a
+        <button
           (click)="toggleActive(i)"
-          class="header__list__element__link"
-          [href]="link.ref"
+          class="header__list__element__button"
           [class.active]="link.active"
-          >{{ link.content }}</a
         >
+          {{ link.content }}
+        </button>
       </li>
     </ul>
   </nav>
   <span *ngIf="screenWidth >= 768">{{ email }}</span>
-  <a href=""
-    ><img
-      src="/assets/icons/icon_shopping_cart_notification.svg"
-      alt="Shopping cart logo"
-  /></a>
-  <span class="counter">1</span>
+  <div class="cart" [class.nav-open]="isMenuOpen">
+    <a href=""
+      ><img src="/assets/icons/icon_shopping_cart.svg" alt="Shopping cart logo"
+    /></a>
+    <span class="counter">{{ counter }}</span>
+  </div>
 </header>

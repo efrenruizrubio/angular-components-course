@@ -10,21 +10,46 @@
 
   &__name {
     margin: 1.5rem 0;
+    width: 240px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  &__tag {
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--hospital-green);
+    border-radius: 2rem;
   }
   &__price {
+    white-space: normal;
     color: var(--hospital-green);
   }
   &__remaining {
     margin: 1.5rem 0;
     font-size: var(--fs-medium);
   }
+  &__description {
+    width: 240px;
+    margin: 1.5rem 0;
+    text-align: justify;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
   &__buttons-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 1.5rem;
 
     & > button {
       padding: 1rem;
+      border: none;
       border-radius: 0.5rem;
     }
     &__button--add {
@@ -52,10 +77,65 @@
       }
     }
   }
+  .expanded {
+    white-space: normal;
+    text-overflow: initial;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .product {
     justify-content: space-between;
+    &__name {
+      width: 145px;
+    }
+    &__description {
+      width: 145px;
+    }
+    &__remaining {
+      font-size: var(--fs-small);
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .product {
+    &__name {
+      width: 225px;
+    }
+    &__description {
+      width: 225px;
+    }
+    &__remaining {
+      font-size: var(--fs-small);
+    }
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .product {
+    &__name {
+      width: 315px;
+    }
+    &__description {
+      width: 315px;
+    }
+    &__remaining {
+      font-size: var(--fs-small);
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .product {
+    &__name {
+      width: 450px;
+    }
+    &__description {
+      width: 450px;
+    }
+    &__remaining {
+      font-size: var(--fs-small);
+    }
   }
 }

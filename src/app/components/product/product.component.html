@@ -1,11 +1,26 @@
 <div class="product">
-  <p class="product__name">{{ product.title }}</p>
-  <app-img class="" [img]="product.image" [alt]="product.title"></app-img>
+  <p
+    class="product__name"
+    (click)="expandProductName()"
+    [class.expanded]="expandName"
+  >
+    {{ product.title }}
+  </p>
+  <p class="product__tag">{{ product.tag }}</p>
+  <!-- FakeStoreAPI server went down, meanwhile, used https://fakeapi.platzi.com/, the image is inside an images array -->
+  <app-img [changeImg]="product.image" [alt]="product.title"></app-img>
   <h2 class="product__price">{{ product.price | currency: "USD" }}</h2>
+  <p
+    class="product__description"
+    (click)="expandProductDescription()"
+    [class.expanded]="expandDescription"
+    appHighlight
+  >
+    {{ product.description | capitalize }}
+  </p>
   <h3 class="product__remaining">
     Remaining units: {{ product.quantityLeft }}
   </h3>
-  <p class="product__description" appHighlight>{{ product.description }}</p>
   <div class="product__buttons-container">
     <button
       class="product__buttons-container__button--add"

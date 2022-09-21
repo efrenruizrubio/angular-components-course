@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@models/product.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,10 @@ import { Product } from '@models/product.model';
 export class StoreService {
   private shoppingCart: Product[] = [];
   private products: Product[] = [];
+  private myCart = new BehaviorSubject<Product[]>([]);
+
+  myCart$ = this.myCart.asObservable();
+
   total: number = 0;
 
   constructor() {}
@@ -29,6 +34,7 @@ export class StoreService {
       this.shoppingCart.push(product);
       this.products[index].quantityLeft -= 1;
       this.total += product.price;
+      this.myCart.next(this.shoppingCart);
     } else {
       alert('No hay mas productos');
     }
@@ -40,6 +46,7 @@ export class StoreService {
       this.shoppingCart[index].quantityLeft += 1;
       this.shoppingCart.splice(index, 1);
       this.total -= product.price;
+      this.myCart.next(this.shoppingCart);
     } else {
       alert(
         'No puedes eliminar un producto que no está en tu carrito de compras'

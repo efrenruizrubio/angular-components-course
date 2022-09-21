@@ -49,9 +49,15 @@
       padding: 0.5rem;
       font-size: var(--fs-small);
       font-weight: var(--fw-bold);
-      &__link {
+      &__button {
+        padding: 0.5rem 1rem;
+        background: none;
+        border: none;
+        font-family: "Quicksand", sans-serif;
         color: var(--very-light-pink);
+
         &:hover {
+          cursor: pointer;
           color: var(--hospital-green);
         }
         &.active {
@@ -62,6 +68,25 @@
         border: 1px solid var(--very-light-pink);
         border-radius: 0.75rem;
       }
+    }
+  }
+  .cart {
+    position: relative;
+    &.nav-open {
+      z-index: -4;
+    }
+    .counter {
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      background-color: var(--hospital-green);
+      border-radius: 50%;
+      display: block;
+      color: white;
+      text-align: center;
+      position: absolute;
+      top: -10px;
+      right: -10px;
     }
   }
 }
@@ -115,7 +140,37 @@
   .header {
     &__list {
       flex-direction: row;
-      gap: 1rem;
+      gap: 0;
+
+      &__element {
+        padding: 0;
+        &__button {
+          color: var(--dark);
+          font-weight: var(--fw-bold);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    &__list {
+      &__element {
+        font-size: var(--fs-medium);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .header {
+    &__list {
+      &__element {
+        &__button {
+          font-size: var(--fs-big);
+        }
+      }
     }
   }
 }

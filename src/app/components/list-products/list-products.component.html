@@ -1,12 +1,4 @@
-<p class="products__text">
-  Amount of products in shopping cart:
-  <strong>{{ shoppingCart.length }}</strong>
-</p>
-<p class="products__text">
-  <strong>Total: ${{ total.toFixed(2) }}</strong>
-</p>
 <p class="products__text">Today is {{ today | date: "short" }}</p>
-<p class="products__text">Time ago: {{ finishDiscount | timeAgo }}</p>
 <p class="products__text">
   The discount finishes at {{ finishDiscount | date: "short" }}
 </p>
@@ -14,12 +6,25 @@
   There are {{ hoursLeft.toFixed(2) }} hours remaining
 </p>
 <div class="products">
-  <app-product
-    *ngFor="let product of products"
-    [product]="product"
-    (addProduct)="onAddToShoppingCart($event)"
-    (removeProduct)="onRemoveFromShoppingCart($event)"
-    [productAvailable]="!(product.quantityLeft > 0)"
-    [productRemovable]="!shoppingCart.includes(product)"
-  ></app-product>
+  <!-- <app-product> </app-product> -->
+  <ng-container *ngIf="!filteredProducts.length; else elseProduct">
+    <app-product
+      *ngFor="let product of products"
+      [product]="product"
+      (addProduct)="onAddToShoppingCart($event)"
+      (removeProduct)="onRemoveFromShoppingCart($event)"
+      [productAvailable]="!(product.quantityLeft > 0)"
+      [productRemovable]="!shoppingCart.includes(product)"
+    ></app-product>
+  </ng-container>
+  <ng-template #elseProduct>
+    <app-product
+      *ngFor="let product of filteredProducts"
+      [product]="product"
+      (addProduct)="onAddToShoppingCart($event)"
+      (removeProduct)="onRemoveFromShoppingCart($event)"
+      [productAvailable]="!(product.quantityLeft > 0)"
+      [productRemovable]="!shoppingCart.includes(product)"
+    ></app-product>
+  </ng-template>
 </div>

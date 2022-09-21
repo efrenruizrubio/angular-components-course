@@ -1,5 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { LinkHeader } from '@models/linkHeader.model';
+import { StoreService } from '@services/store.service';
+import { HeaderService } from '@services/header.service';
 
 @Component({
   selector: 'app-header',
@@ -10,33 +12,36 @@ export class HeaderComponent implements OnInit {
   screenWidth: number;
   email: string = 'efren282@outlook.es';
   isMenuOpen: boolean = false;
-  links: LinkHeader[] = [
-    { content: 'All', ref: '#', active: false },
-    { content: 'Clothes', ref: '#', active: false },
-    { content: 'Electronics', ref: '#', active: false },
-    { content: 'Furniture', ref: '#', active: false },
-    { content: 'Toys', ref: '#', active: false },
-    { content: 'Others', ref: '#', active: false },
-  ];
+  counter: number = 0;
+  links: LinkHeader[] = [];
 
-  constructor() {
+  constructor(
+    private storeService: StoreService,
+    private headerService: HeaderService
+  ) {
+    this.isMenuOpen = this.headerService.getMenuState();
     this.screenWidth = window.innerWidth;
-    this.getScreenSize();
+    this.links = this.headerService.getLinks();
   }
 
-  ngOnInit(): void {}
-
   @HostListener('window:resize', ['$event'])
-  getScreenSize() {
+  setScreenSize() {
     this.screenWidth = window.innerWidth;
+  }
+
+  ngOnInit(): void {
+    this.storeService.myCart$.subscribe((products) => {
+      this.counter = products.length;
+    });
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.headerService.setMenuState();
+    this.isMenuOpen = this.headerService.getMenuState();
   }
 
   toggleActive(i: number) {
-    this.links.forEach((link) => (link.active = false));
-    this.links[i].active = true;
+    this.headerService.toggleActiveLink(i);
+    this.links = this.headerService.getLinks();
   }
 }
