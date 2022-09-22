@@ -85,4 +85,18 @@ export class ListProductsComponent implements OnInit, OnDestroy {
     this.storeService.removeProduct(product);
     this.total = this.storeService.getTotal();
   }
+
+  addProduct() {
+    let product: Product = {
+      title: '1',
+      id: '1',
+      image: 'none',
+      tag: '1',
+      price: 2,
+      description: '2',
+      category: '2',
+      quantityLeft: 2,
+    };
+    this.products.push(product);
+  }
 }
